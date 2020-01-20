@@ -23,8 +23,10 @@ const myBooks = [
     select.addEventListener('change', e => {
         fillData(select.value, tbody);
     });
-  });
 
+    
+
+  });
 
   const fillData = (selecVal, tbody) => {
     let bookList = myBooks;
@@ -33,6 +35,22 @@ const myBooks = [
     if (selecVal === 'published') {
         bookList = myBooks.filter(book => book.published);
     }
-
     
+    // create dynamic HTML
+    let html = '';
+    bookList.forEach(book => {
+        html += '<tr>';
+        html += `<td>${book.title}</td>`;
+        html += `<td>${book.genre}</td>`;
+        html += `<td>${book.age}</td>`;
+        html += `<td>${book.pages}</td>`;
+        html += `<td>${book.yearPublished > 0 ? book.yearPublished: 'N/A'}</td>`;
+        html += `</tr>`;
+    });
+    
+    // Inject the html
+    tbody.innerHTML = html;    
   }
+
+
+  
